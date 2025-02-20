@@ -1,0 +1,9 @@
+@import "tailwindcss";
+/* src/fonts.css */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../public/fonts/HostGrotesk-Regular.ttf') format('ttf');
+
+    font-weight: normal;
+    font-style: normal;
+  }
