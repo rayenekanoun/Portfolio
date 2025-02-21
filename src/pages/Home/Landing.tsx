@@ -42,25 +42,27 @@ const Landing = () => {
   return (
     <Box
     display="flex"
-    flexDirection={["column", "column", "row"]}
+    flexDirection={["column", "column", "column","row"]}
     justifyContent={["space-between", "center", "space-between"]}
     fontWeight="medium"
     width={["100%", "100%", "100%"]}
-    height={["120vh", "200%", "100vh"]}
+    height={["140vh", "140vh", "140vh","100vh"]}
+    mt={["0","0px","160px", "0"]}
+
   >
     <Box
-      width={["100%", "100%", "50%"]}
-      height={["60%", "50%", "100%"]}
+      width={["100%", "100%", "100%","50%"]}
+      height={["60%", "60%", "60%","100%"]}
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      p={["5", "5", "10"]}
-      mt={["20", "10", "0"]}
-      mb={["20", "10", "0"]}
+      p={["5", "5", '20',"10"]}
+      mt={["20", "10", "10",0]}
+      mb={["20", "10", "10","0"]}
     >
       <Text
         fontWeight=""
-        fontSize={["sm", "md", "lg"]}
+        fontSize={["xs", "sm", "sm","lg"]}
         fontFamily={"monospace"}
       >
         <ColorSwatch
@@ -88,7 +90,7 @@ const Landing = () => {
     </Box>
 
     <Box
-      width={["100%", "100%", "50%"]}
+      width={["100%", "100%", "100%","50%"]}
       height={["100%", "50%", "100%"]}
       display="flex"
       flexDirection="column"
@@ -96,11 +98,12 @@ const Landing = () => {
       alignItems={["center", "center", "flex-end"]}
       p={["5", "5", "20"]}
       pt={["0", "0", "0"]}
+
     >
       <Image
         src={landingImg}
         alt="Landing"
-        width={["350px", "590px", "350px"]} // Responsive width
+        width={["350px", "590px", "590px","350px"]} // Responsive width
         height="auto"
       />
     </Box>

@@ -4,12 +4,41 @@ import {
   Flex,
   Container,
   Icon,
-  useBreakpointValue,
+  Tooltip,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Code2, Database, Layout, Settings, Globe } from "lucide-react";
 
 const MotionBox = motion(Box);
+
+const skillDescriptions = {
+  "Node.js": "JavaScript runtime for scalable backend applications.",
+  "Express.js": "Minimalist web framework for Node.js.",
+  "Nest.js": "Progressive Node.js framework for scalable apps.",
+  "React.js": "JavaScript library for building user interfaces.",
+  HTML: "Markup language for structuring web pages.",
+  CSS: "Stylesheet language for designing web pages.",
+  TailwindCSS: "Utility-first CSS framework for rapid UI development.",
+  Python: "High-level programming language for various applications.",
+  TypeScript: "Typed superset of JavaScript for better code quality.",
+  JavaScript: "Popular language for web development.",
+  Java: "Versatile OOP language for web, mobile, and enterprise apps.",
+  "C++": "Efficient language for system programming and game development.",
+  C: "Low-level language for system and embedded programming.",
+  Assembly: "Low-level programming language for direct hardware control.",
+  SQL: "Language for managing structured databases.",
+  NoSQL: "Databases for flexible, scalable data storage.",
+  "PL/SQL": "Oracle's procedural language extension for SQL.",
+  PostgreSQL: "Open-source relational database known for extensibility.",
+  MongoDB: "NoSQL database for scalable and flexible storage.",
+  Git: "Version control system for tracking code changes.",
+  GitHub: "Cloud-based Git repository hosting service.",
+  GitLab: "DevOps platform for CI/CD and Git repositories.",
+  Docker: "Platform for developing, shipping, and running containers.",
+  Kubernetes: "Orchestration system for containerized applications.",
+  AWS: "Amazon's cloud computing platform.",
+  Postman: "API testing and development tool.",
+};
 
 const TechStack = () => {
   const stackData = [
@@ -63,7 +92,7 @@ const TechStack = () => {
 
   return (
     <Box
-      fontSize="5xl"
+      fontSize={["3xl", "3xl", "4xl", "6xl"]}
       fontWeight="medium"
       width={["100%", "100%", "100%"]}
       textAlign="center"
@@ -83,11 +112,7 @@ const TechStack = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Box
-            fontSize={useBreakpointValue({ base: "4xl", md: "5xl" })}
-            fontWeight="bold"
-            color="white"
-          >
+          <Box fontWeight="bold" color="white">
             Tech Stack 🛠 ️
           </Box>
           <Flex direction="column" gap={8}>
@@ -103,10 +128,10 @@ const TechStack = () => {
                   x: 0,
                 }}
                 transition={{
-                  duration: 0.8,
+                  duration: 0.2,
                   delay: index * 0.1,
                 }}
-                viewport={{ once: false, margin: "-100px" }}
+                viewport={{ once: true, margin: "-100px" }}
                 p={{ base: 6, md: 8 }}
                 backdropFilter="blur(8px)"
                 boxShadow="2xl"
@@ -131,25 +156,38 @@ const TechStack = () => {
                   alignItems={["center"]}
                 >
                   {category.skills.map((skill, skillIndex) => (
-                    <MotionBox
+                    <Tooltip
                       key={skillIndex}
-                      fontSize={["sm", "3xl", "3xl"]}
-                      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.1,
-                        delay: skillIndex * 0.1,
-                      }}
-                      px={4}
-                      py={2}
-                      borderRadius="full"
+                      label={skillDescriptions[skill] || "No description available"}
+                      bg="gray.700"
                       color="white"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
+                      fontSize="md"
+                      placement="top"
+                      borderRadius="md"
+                      p={2}
                     >
-                      {skill}
-                    </MotionBox>
+                      <MotionBox
+                        fontSize={["sm", "2xl", "2xl", "3xl"]}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.1,
+                          delay: skillIndex * 0.1,
+                        }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        px={4}
+                        py={2}
+                        borderRadius="full"
+                        color="white"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        cursor="pointer"
+                        _hover={{ bg: "gray.700" }}
+                      >
+                        {skill}
+                      </MotionBox>
+                    </Tooltip>
                   ))}
                 </Flex>
               </MotionBox>
@@ -160,4 +198,5 @@ const TechStack = () => {
     </Box>
   );
 };
+
 export default TechStack;

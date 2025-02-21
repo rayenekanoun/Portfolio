@@ -18,7 +18,7 @@ const Home = () => {
       justifyContent="center"
       bgGradient="linear(to-t, blue.400, blue.300)"
       color="white"
-      mt={["80px", "100px"]}
+      mt={["80px","0px","0px", "100px"]}
       overflowX="hidden"
     >
       <Landing />

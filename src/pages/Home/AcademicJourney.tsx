@@ -10,8 +10,8 @@ const AcademicJourney = () => {
     return(
         <Box
         width="100%"
-        maxW="container.xl"
         mx="auto"
+        mt={[30,30,30, 30]}
         mb={10}
         p={8}
         borderRadius="xl"
@@ -22,7 +22,7 @@ const AcademicJourney = () => {
         {/* Centered Heading */}
         <Box display="flex" justifyContent="center" mb={8}>
           <Text
-            fontSize={["3xl", "4xl"]}
+            fontSize={["3xl","4xl"]}
             fontWeight="bold"
             color="white"
             bgGradient="linear(to-r, blue.400, purple.400)"

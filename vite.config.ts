@@ -9,7 +9,7 @@ import tsconfigPaths from "vite-tsconfig-paths"
 export default defineConfig({
   plugins: [react(),tailwindcss(),tsconfigPaths()],
   server: {
-    host: true, // Allows access on your network
+    host: '0.0.0.0',// Allows access on your network
     port: 5173, // Ensure the port is correctly set
   },
 })

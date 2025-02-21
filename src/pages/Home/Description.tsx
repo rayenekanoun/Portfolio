@@ -35,6 +35,8 @@ const Description = () => {
       pb={16}
       borderBottom={"1px solid #2d3748"}
       borderTop={"1px solid #2d3748"}
+      fontSize={["lg", "lg","xl", "2xl"]}
+
 
       
     >
@@ -48,7 +50,6 @@ const Description = () => {
         width={["100%", "100%", "50%"]}
         p={5}
         fontFamily={"Inter"}
-        fontSize={["lg", "lg", "2xl"]}
         height={"100%"}
         color={"gray.400"}
       >
@@ -81,7 +82,6 @@ const Description = () => {
         width={["100%", "100%", "50%"]}
         p={5}
         fontFamily={"Inter"}
-        fontSize={["lg", "lg", "2xl"]}
         color={"gray.400"}
       >
         AS A DEDICATED COMPUTER ENGINEER, I BRING A DIVERSE SET OF SKILLS AND A
