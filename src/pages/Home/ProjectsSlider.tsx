@@ -1,22 +1,170 @@
-import { Box } from "@chakra-ui/react";
-import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
 import React from "react";
+import { Box, Button, Image, Text, Stack, Tag, useDisclosure } from "@chakra-ui/react";
+import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import {
+  DrawerRoot,
+  DrawerBackdrop,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerCloseTrigger,
+} from "@/components/ui/drawer";
+
+import coiffImg from "../../assets/coiff.jpg";
+import expensesImg from "../../assets/expenses.png";
+import expensesTrackerImg from "../../assets/expensestracker.png";
+import gameReleasesImg from "../../assets/gameRealeses.png";
+import venturesImg from "../../assets/ventures.png";
+import weatherAppImg from "../../assets/weatherApp.png";
 
 const projects = [
-  { title: "Project 1", color: "red.100" },
-  { title: "Project 2", color: "blue.400" },
-  { title: "Project 3", color: "green.400" },
-  { title: "Project 4", color: "purple.400" },
-  { title: "Project 5", color: "red.400" },
-  { title: "Project 6", color: "blue.400" },
-  { title: "Project 7", color: "green.400" },
-  { title: "Project 8", color: "purple.400" },
+  {
+    title: "Coiff App",
+    image: coiffImg,
+    color: "purple.400",
+    description: "A modern appointment booking application for hair salons",
+    stack: ["React Native", "Node.js", "MongoDB", "Express"],
+  },
+  {
+    title: "Expenses Tracker",
+    image: expensesTrackerImg,
+    color: "green.400",
+    description: "Mobile-first expense tracking application with budget management",
+    stack: ["React", "Firebase", "Material-UI", "Redux"],
+  },
+  {
+    title: "Game Releases",
+    image: gameReleasesImg,
+    color: "red.400",
+    description: "Video game release calendar and tracking platform",
+    stack: ["Next.js", "Prisma", "PostgreSQL", "Chakra UI"],
+  },
+  {
+    title: "Ventures Platform",
+    image: venturesImg,
+    color: "yellow.400",
+    description: "Startup investment and management platform",
+    stack: ["Vue.js", "Node.js", "MongoDB", "AWS"],
+  },
+  {
+    title: "Weather App",
+    image: weatherAppImg,
+    color: "cyan.400",
+    description: "Real-time weather forecasting application",
+    stack: ["React", "OpenWeather API", "Styled Components"],
+  },
+  {
+    title: "Expenses Dashboard",
+    image: expensesImg,
+    color: "blue.400",
+    description: "Personal finance tracking dashboard with data visualization",
+    stack: ["React", "TypeScript", "Chart.js", "Tailwind CSS"],
+  },
 ];
+
+const ProjectCard = ({ project, isInView, index }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <>
+      <motion.div
+        className="relative"
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.1, ease: "easeOut" },
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{
+          opacity: isInView ? 1 : 0,
+          y: isInView ? 0 : 20,
+        }}
+        transition={{
+          duration: 0.2,
+          delay: index * 0.1,
+          ease: "easeOut",
+        }}
+        onClick={onOpen}
+      >
+        <Box
+          minW={["280px", "320px"]}
+          h={["180px", "200px"]}
+          borderRadius="lg"
+          overflow="hidden"
+          position="relative"
+          cursor="pointer"
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            objectFit="cover"
+            w="full"
+            h="full"
+          />
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            bg="blackAlpha.600"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="xl" fontWeight="bold">
+              {project.title}
+            </Text>
+          </Box>
+        </Box>
+      </motion.div>
+
+      <DrawerRoot open={isOpen} onOpenChange={onClose}>
+        <DrawerBackdrop />
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>{project.title}</DrawerTitle>
+          </DrawerHeader>
+          <DrawerBody>
+            <Stack spacing={4}>
+              <Image
+                src={project.image}
+                alt={project.title}
+                borderRadius="md"
+                w="full"
+                maxH="300px"
+                objectFit="cover"
+              />
+              <Text fontSize="lg">{project.description}</Text>
+              <Box>
+                <Text fontWeight="bold" mb={2}>
+                  Tech Stack:
+                </Text>
+                <Stack direction="row" flexWrap="wrap" gap={2}>
+                  {project.stack.map((tech, index) => (
+                    <Tag key={index} colorScheme={project.color.split('.')[0]}>
+                      {tech}
+                    </Tag>
+                  ))}
+                </Stack>
+              </Box>
+            </Stack>
+          </DrawerBody>
+          <DrawerFooter>
+            <Button onClick={onClose}>Close</Button>
+          </DrawerFooter>
+          <DrawerCloseTrigger />
+        </DrawerContent>
+      </DrawerRoot>
+    </>
+  );
+};
 
 const ProjectSlider = ({ direction = "left" }) => {
   const containerRef = React.useRef(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-20%" });
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: false });
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -33,50 +181,28 @@ const ProjectSlider = ({ direction = "left" }) => {
     <Box
       fontSize="5xl"
       fontWeight="medium"
-      width={["100%", "100%", "100%"]}
+      width="full"
       textAlign="center"
       p={5}
     >
-      <div ref={containerRef} className=" py-12">
-        <h2 className="text-2xl sm:text-1xl md:text-1xl lg:text-1xl xl:text-6xl text-white text-center mb-8">
+      <div ref={containerRef} className="py-12">
+        <Text mb={20} fontSize={["3xl","3xl","4xl","5xl","6xl"]} fontWeight="bold">
           My Projects 🚀
-        </h2>
-        <div className="relative overflow-hidden w-full h-[300px]">
+        </Text>
+        <div ref={ref} className="relative overflow-hidden w-full h-[300px]">
           <motion.div
             className="absolute flex gap-6 left-0"
             style={{ x }}
-            animate={{ opacity: isInView ? 1 : 0.4 }}
+            animate={{ opacity: inView ? 1 : 0 }}
             transition={{ duration: 0.4 }}
           >
             {[...projects, ...projects].map((project, index) => (
-              <motion.div
+              <ProjectCard
                 key={index}
-                className={`
-                      )
-                        min-w-[280px] md:min-w-[320px] h-[180px] md:h-[200px]
-                        ${project.color} rounded-lg shadow-xl
-                        flex items-center justify-center
-                        cursor-pointer backdrop-blur-sm
-                      `}
-                whileHover={{
-                  scale: 1.05,
-                  transition: { duration: 0.3, ease: "easeOut" },
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: isInView ? 1 : 0,
-                  y: isInView ? 0 : 20,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-              >
-                <span className="text-white text-xl font-bold">
-                  {project.title}
-                </span>
-              </motion.div>
+                project={project}
+                isInView={inView}
+                index={index}
+              />
             ))}
           </motion.div>
         </div>
@@ -84,4 +210,5 @@ const ProjectSlider = ({ direction = "left" }) => {
     </Box>
   );
 };
+
 export default ProjectSlider;
