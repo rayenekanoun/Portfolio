@@ -16,8 +16,9 @@ const AcademicJourney = () => {
           p={[4, 6, 8]}
           borderRadius="xl"
           backdropFilter="blur(10px)"
-          boxShadow="2xl"
           position="relative"
+          border={"1px solid"}
+          borderColor="gray.700"
           zIndex="1"
       >
           <Box 

@@ -5,6 +5,7 @@ import ProjectSlider from "./ProjectsSlider";
 import AcademicJourney from "./AcademicJourney";
 import Landing from "./Landing";
 import Description from "./Description";
+import ProjectsGoto from "./ProjectsGoto";
 
 type SectionName = 'landing' | 'academic' | 'projects' | 'techstack' | 'description';
 
@@ -29,7 +30,7 @@ const Home = () => {
   const sectionColors: Record<SectionName, string> = {
     landing: "#000000",    // Dark Navy
     academic: "#212d40",    // Royal Purple
-    projects: "#000000",    // Deep Plum
+    projects: "#212d40  ",    // Deep Plum
     techstack: "#291938",   // Wine Red
     description: "#212d40"  // Dark Coral
   };
@@ -113,7 +114,7 @@ const Home = () => {
       alignItems="center"
       justifyContent="center"
       color="white"
-      mt={["80px", "0px", "0px", "100px"]}
+      mt={["71px", "80px", "80px", "100px"]}
       overflowX="hidden"
       position="relative"
       sx={{
@@ -136,7 +137,9 @@ const Home = () => {
       <Box ref={sectionRefs.techstack} width="100%" minH="100vh">
         <TechStack />
       </Box>
-      <Box height={"100vh"}></Box>
+      <Box width="100%" minH="100vh">
+      <ProjectsGoto />
+      </Box>
     </Box>
   );
 };

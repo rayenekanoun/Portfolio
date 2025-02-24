@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button, Image, Text, Stack, Tag, useDisclosure, useBreakpointValue, Flex } from "@chakra-ui/react";
-import { easeInOut, motion, useScroll, useTransform } from "framer-motion";
+import { Box, Image, Text, useDisclosure, useBreakpointValue } from "@chakra-ui/react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 
@@ -64,7 +64,6 @@ const projects = [
 ];
 
 const ProjectCard = ({ project, isInView, index }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -79,7 +78,6 @@ const ProjectCard = ({ project, isInView, index }) => {
         <Box
           minW={["400px", "280px", "320px", "380px"]}
           h={["350px", "350px", "350px", "300px"]}
-          borderRadius="lg"
           overflow="hidden"
           position="relative"
           cursor="pointer"
@@ -163,7 +161,7 @@ const ProjectSlider = () => {
   
   // For mobile double slider, create two different sets
   const topRowProjects = [projects[3],projects[4],projects[2]];
-  const bottomRowProjects = [projects[5],projects[0],projects[2]];
+  const bottomRowProjects = [projects[5],projects[0],projects[1]];
   return (
     <Box
       fontSize="5xl"

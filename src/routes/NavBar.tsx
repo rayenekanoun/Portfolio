@@ -99,7 +99,7 @@ const NavBar = () => {
         right="0"
         bottom="0"
         height="100vh"
-        bg="rgba(24, 23, 23, 0.7)"
+        bg="rgba(0, 0, 0, 0.7)" // ✅ Semi-transparent black
         backdropFilter="blur(12px)"
         zIndex="20" // ✅ Same as navbar
         opacity={open ? 1 : 0}

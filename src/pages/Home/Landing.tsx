@@ -52,8 +52,11 @@ import {
         position="relative"
       >
         <Box
-          width={["100%", "100%", "50%"]}
+          width={["100%", "100%", "70%"]}
+          fontSize={["3xl", "4xl", "5xl", "6xl","8xl"]}
           mb={[8, 12, 0]}
+          ml={[0, 0, 10]}
+          mt={[0, 0, -20]}
         >
           <Text
             fontSize={["xs", "sm", "lg"]}
@@ -72,22 +75,19 @@ import {
           </Text>
           
           <Text 
-            fontSize={["3xl", "4xl", "5xl", "6xl"]}
             lineHeight="1.2"
-            mb={4}
+            mb={2}
           >
             I BUILD THE   
           </Text>
           <Text 
-            fontSize={["3xl", "4xl", "5xl", "6xl"]}
             lineHeight="1.2"
-            mb={4}
+            mb={2}
           >
             DIGITAL WORLD WITH
           </Text>
           
           <Text 
-            fontSize={["3xl", "4xl", "5xl", "6xl"]}
             mb={6}
           >
             <CodeInIDE /> & PASSION

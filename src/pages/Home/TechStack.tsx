@@ -1,21 +1,21 @@
-import {
-    Box,
-    Text,
-    Flex,
-    Container,
-    Icon,
-  } from "@chakra-ui/react";
-  import { motion } from "framer-motion";
-  import { Code2, Database, Layout, Settings, Globe } from "lucide-react";
-  import {
-    HoverCardArrow,
-    HoverCardContent,
-    HoverCardRoot,
-    HoverCardTrigger,
-  } from "@/components/ui/hover-card";
-  
-  const MotionBox = motion(Box);
-  
+import { Box, Text, Flex, Icon } from "@chakra-ui/react";
+import { css, keyframes } from "@emotion/react";
+
+import { Code2, Database, Layout, Settings, Globe } from "lucide-react";
+
+const TechStack = () => {
+  // Animation keyframes
+  const slideIn = keyframes`
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  `;
+
+  const float = keyframes`
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+  `;
+
   const skillDescriptions: { [key: string]: string } = {
     "Node.js": "JavaScript runtime for scalable backend applications.",
     "Express.js": "Minimalist web framework for Node.js.",
@@ -44,163 +44,154 @@ import {
     AWS: "Amazon's cloud computing platform.",
     Postman: "API testing and development tool.",
   };
-  
-  const TechStack = () => {
-    const stackData = [
-      {
-        category: "Backend Development",
-        skills: ["Node.js", "Express.js", "Nest.js"],
-        icon: <Icon as={Globe} boxSize="6" />,
-        color: "green.400",
-      },
-      {
-        category: "Frontend Development",
-        skills: ["React.js", "HTML", "CSS", "TailwindCSS"],
-        icon: <Icon as={Layout} boxSize="6" />,
-        color: "blue.400",
-      },
-      {
-        category: "Programming Languages",
-        skills: [
-          "Python",
-          "TypeScript",
-          "JavaScript",
-          "Java",
-          "C++",
-          "C",
-          "Assembly",
-        ],
-        icon: <Icon as={Code2} boxSize="6" />,
-        color: "purple.400",
-      },
-      {
-        category: "Database Management",
-        skills: ["SQL", "NoSQL", "PL/SQL", "PostgreSQL", "MongoDB"],
-        icon: <Icon as={Database} boxSize="6" />,
-        color: "yellow.400",
-      },
-      {
-        category: "Tools & Platforms",
-        skills: [
-          "Git",
-          "GitHub",
-          "GitLab",
-          "Docker",
-          "Kubernetes",
-          "AWS",
-          "Postman",
-        ],
-        icon: <Icon as={Settings} boxSize="6" />,
-        color: "red.400",
-      },
-    ];
-  
-    return (
-      <Box
-        fontSize={["3xl", "3xl", "4xl", "6xl"]}
-        fontWeight="medium"
-        width={["100%", "100%", "100%"]}
-        textAlign="center"
-        p={5}
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        mb={10}
-      >
-        <Box>
-          <Container
-            maxW="container.xl"
-            px={4}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
+
+  const stackData = [
+    {
+      category: "Backend Development",
+      skills: ["Node.js", "Express.js", "Nest.js"],
+      icon: Globe,
+      color: "blue.400",
+    },
+    {
+      category: "Frontend Development",
+      skills: ["React.js", "HTML", "CSS", "TailwindCSS"],
+      icon: Layout,
+      color: "purple.400",
+    },
+    {
+      category: "Programming Languages",
+      skills: ["Python", "TypeScript", "JavaScript", "Java", "C++", "C", "Assembly"],
+      icon: Code2,
+      color: "teal.400",
+    },
+    {
+      category: "Database Management",
+      skills: ["SQL", "NoSQL", "PL/SQL", "PostgreSQL", "MongoDB"],
+      icon: Database,
+      color: "pink.400",
+    },
+    {
+      category: "Tools & Platforms",
+      skills: ["Git", "GitHub", "GitLab", "Docker", "Kubernetes", "AWS", "Postman"],
+      icon: Settings,
+      color: "orange.400",
+    },
+  ];
+
+  return (
+    <Box
+      display={["flex"]}
+      p={5}
+      as="section"
+      w="full"
+      py={20}
+      position="relative"
+      overflow="hidden"
+    >
+      <Box maxW="7xl" mx="auto" px={{ base: 4, md: 8 }}>
+        <Flex direction="column" align="center" mb={16}>
+          <Text
+            fontSize={{ base: "3xl", md: "6xl" }}
+            fontWeight="bold"
+            bgGradient="linear(to-r, blue.300, purple.400)"
+            bgClip="text"
+            color={"white"}
+            mb={4}
+            animation={`${float} 4s ease-in-out infinite`}
           >
-            <Box fontWeight="bold" color="white">
-              Tech Stack 🛠 ️
-            </Box>
-            <Flex direction="column" gap={8}>
-              {stackData.map((category, index) => (
-                <MotionBox
-                  key={index}
-                  initial={{
-                    opacity: 0,
-                    x: index % 2 === 0 ? -100 : 100,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    delay: index * 0.1,
-                  }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  p={{ base: 6, md: 8 }}
-                  backdropFilter="blur(8px)"
-                  border="1px solid"
-                  borderColor="gray.700"
+            Technical Arsenal ⚙️
+          </Text>
+          <Text color="gray.400" fontSize="lg" textAlign="center" >
+            Tools & Technologies Powering My Solutions
+          </Text>
+        </Flex>
+
+        <Flex direction="column" gap={12} >
+          {stackData.map((category, index) => (
+            <Box
+              key={index}
+              animation={`${slideIn} 0.6s ease-out ${index * 0.2}s both`}
+              display={["flex", "flex", "flex"]}
+              flexDirection="column"
+              alignItems={["center", "center", "center"]}
+            >
+              <Flex align="center" mb={6} gap={5}  
+              >
+                <Icon
+                  as={category.icon}
+                  boxSize={10}
+                  color={category.color}
+                  p={2}
+                  borderRadius="xl"
+                  filter="drop-shadow(0 0 8px var(--chakra-colors-purple-500))"
+                />
+                <Text
+                  fontSize={["md", "lg", "2xl"]}
+                  fontWeight="bold"
+                  color="whiteAlpha.900"
+                  textTransform="uppercase"
+                  letterSpacing="2px"
                 >
-                  <Flex align="center" gap={4} mb={6}>
-                    <Box color={category.color} p={3}>
-                      {category.icon}
-                    </Box>
-                    <Text
-                      fontSize={["sm", "3xl", "3xl"]}
-                      fontWeight="semibold"
-                      color="#cbb2d9"
-                    >
-                      {category.category}
-                    </Text>
-                  </Flex>
-                  <Flex
-                    flexWrap="wrap"
-                    gap={3}
-                    display={["flex"]}
-                    justifyContent="center"
-                    alignItems={["center"]}
+                  {category.category}
+                </Text>
+              </Flex>
+
+              <Flex wrap="wrap" gap={4} px={4} display={["flex", "flex", "flex"]} justifyContent="center">
+                {category.skills.map((skill, skillIndex) => (
+                  <Box
+                    key={skillIndex}
+                    px={5}
+                    py={2}
+                    borderRadius="full"
+                    bg="blackAlpha.400"
+                    color="gray.200"
+                    fontSize="md"
+                    transition="all 0.2s ease"
+                    _hover={{
+                      bg: "blackAlpha.600",
+                      color: "purple.300",
+                      transform: "scale(1.05)",
+                      boxShadow: "0 0 12px rgba(128, 90, 213, 0.4)",
+                      _before: {
+                        left: "120%",
+                      },
+                    }}
+                    cursor="pointer"
+                    title={skillDescriptions[skill]}
+                    position="relative"
+                    overflow="hidden"
+                    _before={{
+                      content: '""',
+                      position: "absolute",
+                      left: "-50%",
+                      width: "20%",
+                      height: "100%",
+                      bg: "whiteAlpha.200",
+                      transform: "skewX(-30deg)",
+                      transition: "0.4s ease",
+                    }}
+
                   >
-                    {category.skills.map((skill, skillIndex) => (
-                      <HoverCardRoot key={skillIndex} openDelay={180} closeDelay={180}>
-                        <HoverCardTrigger>
-                          <MotionBox
-                            fontSize={["sm", "2xl", "2xl", "3xl"]}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{
-                              duration: 0.1,
-                              delay: skillIndex * 0.1,
-                            }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            px={4}
-                            py={2}
-                            borderRadius="full"
-                            color="#cbb2d9"
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            cursor="pointer"
-                            _hover={{ color: "gray.700" }}
-                          >
-                            {skill}
-                          </MotionBox>
-                        </HoverCardTrigger>
-                        <HoverCardContent bg="gray.800" color="white" p={3} borderRadius="md">
-                          {skillDescriptions[skill as keyof typeof skillDescriptions] || "No description available"}
-                          <HoverCardArrow />
-                        </HoverCardContent>
-                      </HoverCardRoot>
-                    ))}
-                  </Flex>
-                </MotionBox>
-              ))}
-            </Flex>
-          </Container>
-        </Box>
+                    {skill}
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+          ))}
+        </Flex>
+
+        <Text
+          textAlign="center"
+          mt={16}
+          color="gray.600"
+          fontSize="sm"
+          fontStyle="italic"
+        >
+          *hover technologies for details
+        </Text>
       </Box>
-    );
-  };
-  
-  export default TechStack;
-  
+    </Box>
+  );
+};
+
+export default TechStack;
