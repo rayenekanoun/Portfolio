@@ -24,8 +24,7 @@ const NavBar = () => {
         borderColor="gray.800"
         p={[3, 6, 8]} // Responsive padding
         position="fixed"
-        bg="whiteAlpha.100"
-        backdropFilter="blur(20px)"
+        backdropFilter="blur(40px)"
         height={["75px","100px"]} // Responsive height
         top="0"
         left="0"

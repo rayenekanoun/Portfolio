@@ -139,7 +139,8 @@ import {
                   viewport={{ once: true, margin: "-100px" }}
                   p={{ base: 6, md: 8 }}
                   backdropFilter="blur(8px)"
-                  boxShadow="2xl"
+                  border="1px solid"
+                  borderColor="gray.700"
                 >
                   <Flex align="center" gap={4} mb={6}>
                     <Box color={category.color} p={3}>
@@ -148,7 +149,7 @@ import {
                     <Text
                       fontSize={["sm", "3xl", "3xl"]}
                       fontWeight="semibold"
-                      color="white"
+                      color="#cbb2d9"
                     >
                       {category.category}
                     </Text>
@@ -175,7 +176,7 @@ import {
                             px={4}
                             py={2}
                             borderRadius="full"
-                            color="white"
+                            color="#cbb2d9"
                             display="flex"
                             alignItems="center"
                             justifyContent="center"
