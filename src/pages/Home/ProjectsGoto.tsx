@@ -1,58 +1,66 @@
 import { Box, Grid, Heading, Text, Flex, Icon, Link } from "@chakra-ui/react";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { MdBlock } from "react-icons/md"; // Unavailable icon
 
 const ProjectsGoto = () => {
   const projects = [
     {
       title: "Expenses Tracker",
       description:
-        "An expense tracking application with real-time analytics for budget management for individuals and businesses .",
-      tech: "Nextjs • Nestjs • Supabase ",
-      link: "#",
+        "An expense tracking application with real-time analytics for budget management for individuals and businesses.",
+      tech: "Nextjs • Nestjs • Supabase",
+      link: "https://amtm.pro/",
       github: "#",
     },
     {
       title: "Game Releases",
       description:
-        "A platform to track and manage video game releases with real-time updates and notifications for gamers .",
+        "A platform to track and manage video game releases with real-time updates and notifications for gamers.",
       tech: "React • Nodejs • MongoDB",
-      link: "#",
+      link: "https://www.good-game-countdowns.com/",
       github: "#",
     },
     {
       title: "Swap Clothes backend",
       description:
-        "A platform to swap clothes with other users to reduce waste and promote sustainable fashion .",
-      tech: " Nodejs • MongoDB",
+        "A platform to swap clothes with other users to reduce waste and promote sustainable fashion.",
+      tech: "Nodejs • MongoDB",
       link: "#",
-      github: "#",
+      github: "https://github.com/rayenekanoun/SwapClothing",
     },
     {
       title: "Weather App",
       description:
-        "A real-time weather forecasting application with location-based weather updates and alerts .",
+        "A real-time weather forecasting application with location-based weather updates and alerts.",
       tech: "HTML • CSS • OpenWeatherMap API",
       link: "#",
-      github: "#",
+      github: "https://github.com/rayenekanoun/WeatherApp",
     },
     {
       title: "Hotel management system",
       description:
-        "A platform to manage hotel bookings, room service, and customer feedback .",
+        "A platform to manage hotel bookings, room service, and customer feedback.",
       tech: "Java • JavaSwing • MySQL",
       link: "#",
-      github: "#",
+      github: "https://github.com/rayenekanoun/projet_java",
     },
+  //  {
+  //     title: "Ecommerce platform",
+  //     description:
+  //       "An online shopping platform with product listings, cart management, and payment gateway.",
+  //     tech: "React • Nodejs • MongoDB",
+  //     link: "#",
+  //     github: "#",
+  //   },
+    
     {
-      title: "Ecommerce platform",
+      title: "Voyage agency website",
       description:
-        "An online shopping platform with product listings, cart management, and payment gateway .",
-      tech: "React • Nodejs • MongoDB",
+        "A website for a travel agency with destination listings and booking forms.",
+      tech: "HTML • CSS",
       link: "#",
-      github: "#",
+      github: "https://github.com/rayenekanoun/voyage_agency",
     },
-
-    // Add more projects...
   ];
 
   return (
@@ -93,7 +101,7 @@ const ProjectsGoto = () => {
             backdropFilter="auto"
             backdropBlur="10px"
             transition="all 0.3s ease"
-            minH="250px" // Set minimum card height
+            minH="250px"
             display="flex"
             flexDirection="column"
             _hover={{
@@ -103,7 +111,7 @@ const ProjectsGoto = () => {
               cursor: "pointer",
             }}
           >
-            {/* Content Area with fixed bottom section */}
+            {/* Content Area */}
             <Box flex="1">
               <Heading size="md" mb={3} color="teal.200">
                 {project.title}
@@ -113,7 +121,7 @@ const ProjectsGoto = () => {
               </Text>
             </Box>
 
-            {/* Fixed Bottom Section */}
+            {/* Bottom Section */}
             <Box mt="auto">
               <Text
                 fontSize="xs"
@@ -126,16 +134,37 @@ const ProjectsGoto = () => {
                 {project.tech}
               </Text>
               <Flex justify="space-between" align="center">
-                <Link href={project.link} _hover={{ textDecoration: "none" }}>
+                {/* Demo Link */}
+                <Link
+                  href={project.link !== "#" ? project.link : undefined}
+                  target={project.link !== "#" ? "_blank" : undefined}
+                  rel={project.link !== "#" ? "noopener noreferrer" : undefined}
+                  _hover={{ textDecoration: "none" }}
+                  cursor={project.link === "#" ? "not-allowed" : "pointer"}
+                  opacity={project.link === "#" ? 0.5 : 1}
+                >
                   <Flex align="center" gap={2}>
-                    <Icon as={FiExternalLink} />
-                    <Text fontSize="sm">Demo</Text>
+                    <Icon as={project.link === "#" ? MdBlock : FiExternalLink} />
+                    <Text fontSize="sm">
+                      {project.link === "#" ? "Unavailable" : "Demo"}
+                    </Text>
                   </Flex>
                 </Link>
-                <Link href={project.github} _hover={{ textDecoration: "none" }}>
+
+                {/* GitHub Link */}
+                <Link
+                  href={project.github !== "#" ? project.github : undefined}
+                  target={project.github !== "#" ? "_blank" : undefined}
+                  rel={project.github !== "#" ? "noopener noreferrer" : undefined}
+                  _hover={{ textDecoration: "none" }}
+                  cursor={project.github === "#" ? "not-allowed" : "pointer"}
+                  opacity={project.github === "#" ? 0.5 : 1}
+                >
                   <Flex align="center" gap={2}>
-                    <Icon as={FiGithub} />
-                    <Text fontSize="sm">Code</Text>
+                    <Icon as={project.github === "#" ? MdBlock : FiGithub} />
+                    <Text fontSize="sm">
+                      {project.github === "#" ? "Unavailable" : "Code"}
+                    </Text>
                   </Flex>
                 </Link>
               </Flex>

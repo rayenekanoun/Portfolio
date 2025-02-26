@@ -219,7 +219,7 @@ const skillDetails: {
 };
 
 // The SkillDesc component uses the npmName field (if available) to fetch download stats.
-const SkillDesc = ({ skill }: { skill: string }) => {
+const SkillDesc = ({ skill, category }: { skill: string , category : string }) => {
   const convert = (labelValue: number) => {
     const formatNumber = (num: number) => {
       return num.toFixed(3).replace(".", ",");
@@ -233,7 +233,7 @@ const SkillDesc = ({ skill }: { skill: string }) => {
       ? formatNumber(Math.abs(labelValue) / 1.0e3) + "K"
       : formatNumber(Math.abs(labelValue));
   };
-
+  console.log(category);
   const details = skillDetails[skill];
   // If npmName exists, fetch download count; otherwise show "N/A"
   const { downloads, isLoading } = details.npmName
@@ -260,7 +260,7 @@ const SkillDesc = ({ skill }: { skill: string }) => {
             <Text textStyle="xs">
               {isLoading ? (
                 "Loading..."
-              ) : downloads && details.name !== "Python" ? (
+              ) : downloads && details.name !== "Python" && category !=="Tools & Platforms" ? (
                 `${convert(Number(downloads))} Downloads`
               ) : (
                 <Flex align="center" gap="1">
@@ -456,7 +456,7 @@ const TechStack = ({ inView = false }: TechStackProps) => {
                         {skill}
                       </Box>
                     </HoverCardTrigger>
-                    <SkillDesc skill={skill} />
+                    <SkillDesc skill={skill} category={category.category} />
                   </HoverCardRoot>
                 ))}
               </Flex>
