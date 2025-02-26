@@ -473,7 +473,7 @@ const TechStack = ({ inView = false }: TechStackProps) => {
           opacity={inView ? 1 : 0}
           transition="opacity 1.5s ease-out"
         >
-          *hover technologies for details
+          Hover technologies for details
         </Text>
       </Box>
     </Box>
