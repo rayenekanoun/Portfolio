@@ -16,6 +16,9 @@ const Home = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const techstackRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
+  
+  // State to track if TechStack is in view
+  const [techStackInView, setTechStackInView] = useState(false);
 
   // Memoized refs object to maintain stable reference
   const sectionRefs = useMemo(() => ({
@@ -106,6 +109,38 @@ const Home = () => {
     };
   }, [sectionColors, sectionRefs]);
 
+  // Set up Intersection Observer for TechStack section
+  useEffect(() => {
+    if (!techstackRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Update state when TechStack enters viewport
+          if (entry.isIntersecting) {
+            setTechStackInView(true);
+          } else {
+            // Optional: Reset animation when out of view
+            // setTechStackInView(false);
+          }
+        });
+      },
+      {
+        // Adjust these options as needed
+        threshold: 0.2, // 20% of the element must be visible
+        rootMargin: "-50px 0px" // Trigger animation a bit before element is fully in view
+      }
+    );
+
+    observer.observe(techstackRef.current);
+
+    return () => {
+      if (techstackRef.current) {
+        observer.unobserve(techstackRef.current);
+      }
+    };
+  }, []);
+
   return (
     <Box
       ref={containerRef}
@@ -117,10 +152,7 @@ const Home = () => {
       mt={["71px", "80px", "80px", "100px"]}
       overflowX="hidden"
       position="relative"
-      sx={{
-        transition: 'background-color 0.5s ease',
-        minHeight: '100vh'
-      }}
+
     >
       <Box ref={sectionRefs.landing} width="100%" minH="100vh">
         <Landing />
@@ -134,11 +166,20 @@ const Home = () => {
       <Box ref={sectionRefs.description} width="100%" minH="100vh">
         <Description />
       </Box>
-      <Box ref={sectionRefs.techstack} width="100%" minH="100vh">
-        <TechStack />
-      </Box>
+      <Box 
+          ref={sectionRefs.techstack} 
+          width="100%" 
+          minH="100vh"
+        style={{
+          opacity: techStackInView ? 1 : 0,
+          transform: techStackInView ? 'translateX(0)' : 'translateX(200px)',
+          
+          transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+        }}
+      >
+      <TechStack inView={techStackInView} />      </Box>
       <Box width="100%" minH="100vh">
-      <ProjectsGoto />
+        <ProjectsGoto />
       </Box>
     </Box>
   );
