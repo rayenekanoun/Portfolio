@@ -44,15 +44,15 @@ const ProjectsGoto = () => {
       link: "#",
       github: "https://github.com/rayenekanoun/projet_java",
     },
-  //  {
-  //     title: "Ecommerce platform",
-  //     description:
-  //       "An online shopping platform with product listings, cart management, and payment gateway.",
-  //     tech: "React • Nodejs • MongoDB",
-  //     link: "#",
-  //     github: "#",
-  //   },
-    
+
+    //   title: "Ecommerce platform",
+    //   description:
+    //     "An online shopping platform with product listings, cart management, and payment gateway.",
+    //   tech: "React • Nodejs • MongoDB",
+    //   link: "#",
+    //   github: "#",
+    // },
+
     {
       title: "Voyage agency website",
       description:
@@ -73,15 +73,18 @@ const ProjectsGoto = () => {
     >
       <Heading
         textAlign="center"
+        fontSize={["2xl", "3xl", "5xl"]}
+        fontWeight="bold"
+        letterSpacing="tight"
         mb={12}
-        fontSize="4xl"
-        fontWeight="300"
-        letterSpacing="2px"
+        color="gray.100"
       >
-        <Text as="span" color="teal.200">
-          //
-        </Text>{" "}
-        Explore My Work
+        <Text as="span" display="block" mt={0}>
+          Glance at My{" "}
+          <Text as="span" color="teal.500">
+            Work
+          </Text>
+        </Text>
       </Heading>
 
       <Grid
@@ -144,7 +147,9 @@ const ProjectsGoto = () => {
                   opacity={project.link === "#" ? 0.5 : 1}
                 >
                   <Flex align="center" gap={2}>
-                    <Icon as={project.link === "#" ? MdBlock : FiExternalLink} />
+                    <Icon
+                      as={project.link === "#" ? MdBlock : FiExternalLink}
+                    />
                     <Text fontSize="sm">
                       {project.link === "#" ? "Unavailable" : "Demo"}
                     </Text>
@@ -155,7 +160,9 @@ const ProjectsGoto = () => {
                 <Link
                   href={project.github !== "#" ? project.github : undefined}
                   target={project.github !== "#" ? "_blank" : undefined}
-                  rel={project.github !== "#" ? "noopener noreferrer" : undefined}
+                  rel={
+                    project.github !== "#" ? "noopener noreferrer" : undefined
+                  }
                   _hover={{ textDecoration: "none" }}
                   cursor={project.github === "#" ? "not-allowed" : "pointer"}
                   opacity={project.github === "#" ? 0.5 : 1}
@@ -173,15 +180,17 @@ const ProjectsGoto = () => {
         ))}
       </Grid>
 
-      <Text
+      <Link
+        display={"block"}
+        href="/projects"
         textAlign="center"
         mt={12}
         fontSize="sm"
         opacity="0.8"
         fontStyle="italic"
       >
-        Scroll down to view detailed case studies →
-      </Text>
+        More Detailed overview in the projects Page →
+      </Link>
     </Box>
   );
 };

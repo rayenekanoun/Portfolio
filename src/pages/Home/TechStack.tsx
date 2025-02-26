@@ -219,7 +219,13 @@ const skillDetails: {
 };
 
 // The SkillDesc component uses the npmName field (if available) to fetch download stats.
-const SkillDesc = ({ skill, category }: { skill: string , category : string }) => {
+const SkillDesc = ({
+  skill,
+  category,
+}: {
+  skill: string;
+  category: string;
+}) => {
   const convert = (labelValue: number) => {
     const formatNumber = (num: number) => {
       return num.toFixed(3).replace(".", ",");
@@ -241,7 +247,7 @@ const SkillDesc = ({ skill, category }: { skill: string , category : string }) =
     : { downloads: null, isLoading: false };
 
   return (
-    <HoverCardContent maxWidth="240px"   p="4">
+    <HoverCardContent maxWidth="240px" p="4">
       <HoverCardArrow />
       <Stack gap="4" direction="row">
         {/* Render the react-icon; center it with mx="auto" */}
@@ -260,7 +266,9 @@ const SkillDesc = ({ skill, category }: { skill: string , category : string }) =
             <Text textStyle="xs">
               {isLoading ? (
                 "Loading..."
-              ) : downloads && details.name !== "Python" && category !=="Tools & Platforms" ? (
+              ) : downloads &&
+                details.name !== "Python" &&
+                category !== "Tools & Platforms" ? (
                 `${convert(Number(downloads))} Downloads`
               ) : (
                 <Flex align="center" gap="1">
@@ -337,6 +345,7 @@ const TechStack = ({ inView = false }: TechStackProps) => {
 
   return (
     <Box
+      borderBottom={"1px solid #2d3748"}
       display={["flex"]}
       p={5}
       as="section"
@@ -411,7 +420,11 @@ const TechStack = ({ inView = false }: TechStackProps) => {
 
               <Flex wrap="wrap" gap={4} px={4} justifyContent="center">
                 {category.skills.map((skill, skillIndex) => (
-                  <HoverCardRoot key={skillIndex} openDelay={200} closeDelay={100}>
+                  <HoverCardRoot
+                    key={skillIndex}
+                    openDelay={200}
+                    closeDelay={100}
+                  >
                     <HoverCardTrigger asChild>
                       <Box
                         px={5}

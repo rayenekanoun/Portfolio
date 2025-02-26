@@ -6,8 +6,9 @@ import AcademicJourney from "./AcademicJourney";
 import Landing from "./Landing";
 import Description from "./Description";
 import ProjectsGoto from "./ProjectsGoto";
+import Footer from "../../components/Footer";
 
-type SectionName = 'landing' | 'academic' | 'projects' | 'techstack' | 'description';
+type SectionName = 'landing' | 'academic' | 'projects' | 'techstack' | 'description' | 'projectsGoto' | 'Footer';
 
 const Home = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,27 +17,30 @@ const Home = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
   const techstackRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  
-  // State to track if TechStack is in view
+  const projectsGotoRef = useRef<HTMLDivElement>(null);
+  const FooterRef = useRef<HTMLDivElement>(null);
+
   const [techStackInView, setTechStackInView] = useState(false);
 
-  // Memoized refs object to maintain stable reference
   const sectionRefs = useMemo(() => ({
     landing: landingRef,
     academic: academicRef,
     projects: projectsRef,
     techstack: techstackRef,
-    description: descriptionRef
+    description: descriptionRef,
+    projectsGoto: projectsGotoRef,
+    Footer: FooterRef
   }), []);
 
-  // Harmonious dark color palette with smooth transitions
-  const sectionColors: Record<SectionName, string> = {
-    landing: "#000000",    // Dark Navy
-    academic: "#212d40",    // Royal Purple
-    projects: "#212d40  ",    // Deep Plum
-    techstack: "#291938",   // Wine Red
-    description: "#212d40"  // Dark Coral
-  };
+  const sectionColors = useMemo(() => ({
+    landing: "#000000",
+    academic: "#212d40",
+    projects: "#212d40",
+    techstack: "#291938",
+    description: "#212d40",
+    projectsGoto: "#291938",
+    Footer: "#000000"
+  }), []);
 
   const interpolateColor = (color1: string, color2: string, ratio: number): string => {
     const r1 = parseInt(color1.substring(1, 3), 16);
@@ -60,7 +64,7 @@ const Home = () => {
 
     const handleScroll = () => {
       if (!container) return;
-      
+
       const viewportMiddle = window.scrollY + window.innerHeight / 2;
       const sections = Object.entries(sectionRefs)
         .map(([name, ref]) => {
@@ -109,34 +113,30 @@ const Home = () => {
     };
   }, [sectionColors, sectionRefs]);
 
-  // Set up Intersection Observer for TechStack section
   useEffect(() => {
     if (!techstackRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Update state when TechStack enters viewport
           if (entry.isIntersecting) {
             setTechStackInView(true);
-          } else {
-            // Optional: Reset animation when out of view
-            // setTechStackInView(false);
           }
         });
       },
       {
-        // Adjust these options as needed
-        threshold: 0.2, // 20% of the element must be visible
-        rootMargin: "-50px 0px" // Trigger animation a bit before element is fully in view
+        threshold: 0.2,
+        rootMargin: "-50px 0px"
       }
     );
 
-    observer.observe(techstackRef.current);
+    const techstackNode = techstackRef.current; // Store ref value locally
+
+    observer.observe(techstackNode);
 
     return () => {
-      if (techstackRef.current) {
-        observer.unobserve(techstackRef.current);
+      if (techstackNode) {
+        observer.unobserve(techstackNode);
       }
     };
   }, []);
@@ -152,7 +152,6 @@ const Home = () => {
       mt={["71px", "80px", "80px", "100px"]}
       overflowX="hidden"
       position="relative"
-
     >
       <Box ref={sectionRefs.landing} width="100%" minH="100vh">
         <Landing />
@@ -167,19 +166,22 @@ const Home = () => {
         <Description />
       </Box>
       <Box 
-          ref={sectionRefs.techstack} 
-          width="100%" 
-          minH="100vh"
+        ref={sectionRefs.techstack} 
+        width="100%" 
+        minH="100vh"
         style={{
           opacity: techStackInView ? 1 : 0,
           transform: techStackInView ? 'translateX(0)' : 'translateX(200px)',
-          
           transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         }}
       >
-      <TechStack inView={techStackInView} />      </Box>
-      <Box width="100%" minH="100vh">
+        <TechStack inView={techStackInView} />
+      </Box>
+      <Box width="100%" minH="100vh" ref={sectionRefs.projectsGoto}>
         <ProjectsGoto />
+      </Box>
+      <Box width="100%" minH="100vh" ref={sectionRefs.Footer}>
+        <Footer />
       </Box>
     </Box>
   );
