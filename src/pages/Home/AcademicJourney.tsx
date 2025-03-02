@@ -63,6 +63,7 @@ const AcademicJourney = () => {
                           fontSize={["sm", "md", "lg"]} 
                           color="gray.300" 
                           mb={1}
+                          pl={6}
                       >
                           Faculty of Science of Tunis, Tunisia
                       </Text>
@@ -70,6 +71,7 @@ const AcademicJourney = () => {
                           fontSize={["xs", "sm", "md"]}
                           color="blue.300"
                           fontWeight="medium"
+                            pl={6}
                       >
                           2022 - 2024
                       </Text>
@@ -96,6 +98,7 @@ const AcademicJourney = () => {
                           fontSize={["sm", "md", "lg"]} 
                           color="gray.300" 
                           mb={1}
+                            pl={6}
                       >
                           Faculty of Science of Tunis, Tunisia
                       </Text>
@@ -103,6 +106,7 @@ const AcademicJourney = () => {
                           fontSize={["xs", "sm", "md"]}
                           color="purple.300"
                           fontWeight="medium"
+                            pl={6}
                       >
                           2024 - 2027
                       </Text>

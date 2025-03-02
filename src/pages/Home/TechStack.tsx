@@ -239,7 +239,6 @@ const SkillDesc = ({
       ? formatNumber(Math.abs(labelValue) / 1.0e3) + "K"
       : formatNumber(Math.abs(labelValue));
   };
-  console.log(category);
   const details = skillDetails[skill];
   // If npmName exists, fetch download count; otherwise show "N/A"
   const { downloads, isLoading } = details.npmName

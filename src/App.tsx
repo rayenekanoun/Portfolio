@@ -2,7 +2,7 @@
 import Navbar from "./routes/NavBar";
 
 import AppRouter from "./routes/AppRoutes";
-
+import Footer from "./components/Footer";
 function App() {
   return (
     <>
